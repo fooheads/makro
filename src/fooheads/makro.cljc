@@ -1,7 +1,4 @@
-(ns fooheads.makro
-  #?(:cljs
-     (:require-macros
-       [fooheads.makro])))
+(ns fooheads.makro)
 
 
 (defn dialect
@@ -17,6 +14,6 @@
   "Useful to catch a generic exception in a macro."
   [env]
   (case (dialect env)
-    :cljs 'js/Error
+    :cljs :default
     :clj  'Exception))
 

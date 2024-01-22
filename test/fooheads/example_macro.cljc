@@ -1,11 +1,19 @@
 (ns fooheads.example-macro
   (:require
-    [fooheads.makro :refer [dialect]])
+    [fooheads.makro :as makro])
   #?(:cljs
      (:require-macros
        [fooheads.example-macro])))
 
 
-(defmacro example-macro []
-  `~(dialect &env))
+(defmacro dialect []
+  `~(makro/dialect &env))
+
+
+(defmacro catch-ex-symbol [e]
+  `(try
+     (throw ~e)
+     (catch ~(makro/ex-symbol &env) e#
+       :error)))
+
 
